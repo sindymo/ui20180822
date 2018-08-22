@@ -43,4 +43,26 @@ public class BasicTestCase {
         // 等待应用启动
         //device.wait(Until.hasObject(By.res("")),5000);
     }
+    
+    
+    
+     public void setUp() throws Exception {
+        // 实例化UiDevice
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        // 实例化Helper
+        helper=new Helper(device);
+        // 实例化PageManager
+        pm=new PageManager(helper);
+        // 启动应用
+        //获取上下文
+        Context context = InstrumentationRegistry.getContext();
+        //通过将包名传给包管理器获取启动的intent
+        final Intent intent = context.getPackageManager()
+                .getLaunchIntentForPackage(PACKAGE_NAME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //启动应用
+        context.startActivity(intent);
+        // 等待应用启动
+        //device.wait(Until.hasObject(By.res("")),5000);
+    }
 }
